@@ -1,0 +1,31 @@
+[
+    {
+        "pk": 1,
+        "employee": 1,
+        "computer": 1,
+        "assigned_date": "2012-03-09",
+        "unassigned_date": "2013-03-09"
+    },
+    {
+        "pk": 2,
+        "employee": 2,
+        "computer": 2,
+        "assigned_date": "1987-03-09",
+        "unassigned_date": "1990-04-18"
+    },
+    {
+        "pk": 3,
+        "employee": 3,
+        "computer": 3,
+        "assigned_date": "2012-10-20",
+        "unassigned_date": "2014-04-05"
+    },
+    {
+        "pk": 4,
+        "employee": 4,
+        "computer": 4,
+        "assigned_date": "2014-10-20",
+        "unassigned_date": null
+    }
+
+]
