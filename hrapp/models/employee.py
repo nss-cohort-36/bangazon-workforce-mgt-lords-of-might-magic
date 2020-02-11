@@ -1,5 +1,5 @@
 from django.db import models
-# from .department import Department
+
 
 class Employee(models.Model):
 
@@ -9,7 +9,6 @@ class Employee(models.Model):
     is_supervisor = models.BooleanField()
     department = models.ForeignKey("Department", on_delete=models.CASCADE)
     training_programs = models.ManyToManyField("TrainingProgram", through='TrainingProgramEmployee')
-    
 
     class Meta:
         verbose_name = ("Employee")
