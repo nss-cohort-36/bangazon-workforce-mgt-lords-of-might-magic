@@ -1,0 +1,39 @@
+[
+    {
+      "model": "hrapp.employee",
+      "pk": 1,
+      "fields": {
+        "first_name": "Lenovo NoGo 2000",
+        "last_name": "2012-03-09",
+        "department_id": "2014-04-05",
+        "is_supervisor":
+      }
+    },
+    {
+      "model": "hrapp.employee",
+      "pk": 2,
+      "fields": {
+        "first_name": "IBM XT",
+        "last_name": "1987-03-09",
+        "department_id": "1990-04-18"
+      }
+    },
+    {
+      "model": "hrapp.employee",
+      "pk": 3,
+      "fields": {
+        "first_name": "Apple MacBook Schmo",
+        "last_name": "2012-10-20",
+        "department_id": "2014-04-05"
+      }
+    },
+    {
+      "model": "hrapp.employee",
+      "pk": 4,
+      "fields": {
+        "first_name": "Apple MacBook Glow",
+        "last_name": "2014-10-20",
+        "department_id": null
+      }
+    }
+  ]
