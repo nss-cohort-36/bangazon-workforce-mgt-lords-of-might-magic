@@ -3,6 +3,7 @@ from django.shortcuts import render
 from hrapp.models import Employee
 from ..connection import Connection
 
+
 def employee_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
