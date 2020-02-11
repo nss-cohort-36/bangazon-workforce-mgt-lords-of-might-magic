@@ -1,31 +1,43 @@
 [
     {
+        "model": "hrapp.employeecomputer",
         "pk": 1,
-        "employee": 1,
-        "computer": 1,
-        "assigned_date": "2012-03-09",
-        "unassigned_date": "2013-03-09"
+        "fields":{
+            "employee_id": 1,
+            "computer_id": 1,
+            "assigned_date": "2012-03-09",
+            "unassigned_date": "2013-03-09"}
+        
     },
     {
+        "model": "hrapp.employeecomputer",
         "pk": 2,
-        "employee": 2,
-        "computer": 2,
-        "assigned_date": "1987-03-09",
-        "unassigned_date": "1990-04-18"
+        "fields": { 
+            "employee_id": 2,
+            "computer_id": 2,
+            "assigned_date": "1987-03-09",
+            "unassigned_date": "1990-04-18"
+        }
     },
     {
+        "model": "hrapp.employeecomputer",
         "pk": 3,
-        "employee": 3,
-        "computer": 3,
-        "assigned_date": "2012-10-20",
-        "unassigned_date": "2014-04-05"
+        "fields": {
+            "employee_id": 3,
+            "computer_id": 3,
+            "assigned_date": "2012-10-20",
+            "unassigned_date": "2014-04-05"}
+        
     },
     {
+        "model": "hrapp.employeecomputer",
         "pk": 4,
-        "employee": 4,
-        "computer": 4,
-        "assigned_date": "2014-10-20",
-        "unassigned_date": null
+        "fields": {
+            "employee_id": 4,
+            "computer_id": 4,
+            "assigned_date": "2014-10-20",
+            "unassigned_date": null}
+        
     }
 
 ]
