@@ -6,7 +6,7 @@
       "title": "SQL",
       "start_date": "2020-03-09",
       "end_date": "2020-03-12",
-      "capacity": 20
+      "capacity": 14
     }
   },
   {
@@ -23,20 +23,20 @@
     "model": "hrapp.training_programs",
     "pk": 3,
     "fields": {
-      "title": "I Luv Business",
+      "title": "I <3 Bizness",
       "start_date": "2020-03-28",
       "end_date": "2020-03-29",
-      "capacity": 12
+      "capacity": 10
     }
   },
   {
     "model": "hrapp.training_programs",
-    "pk": 3,
+    "pk": 4,
     "fields": {
-      "title": "Love",
-      "start_date": "2020-03-28",
-      "end_date": "2020-03-29",
-      "capacity": 12
+      "title": "The Printer 101",
+      "start_date": "2020-04-15",
+      "end_date": "2020-05-01",
+      "capacity": 30
     }
   }
 ]
