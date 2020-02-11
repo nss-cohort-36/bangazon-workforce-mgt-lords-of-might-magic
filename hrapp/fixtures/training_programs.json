@@ -1,6 +1,6 @@
 [
   {
-    "model": "hrapp.training_programs",
+    "model": "hrapp.training_program",
     "pk": 1,
     "fields": {
       "title": "SQL",
@@ -10,7 +10,7 @@
     }
   },
   {
-    "model": "hrapp.training_programs",
+    "model": "hrapp.training_program",
     "pk": 2,
     "fields": {
       "title": "Emotional Intelligence",
@@ -20,7 +20,7 @@
     }
   },
   {
-    "model": "hrapp.training_programs",
+    "model": "hrapp.training_program",
     "pk": 3,
     "fields": {
       "title": "I <3 Bizness",
@@ -30,7 +30,7 @@
     }
   },
   {
-    "model": "hrapp.training_programs",
+    "model": "hrapp.training_program",
     "pk": 4,
     "fields": {
       "title": "The Printer 101",
