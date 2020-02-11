@@ -9,7 +9,7 @@ class Employee(models.Model):
     is_supervisor = models.BooleanField()
     department = models.ForeignKey("Department", on_delete=models.CASCADE)
     training_programs = models.ManyToManyField("TrainingProgram", through='TrainingProgramEmployee')
-    # department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    
 
     class Meta:
         verbose_name = ("Employee")
