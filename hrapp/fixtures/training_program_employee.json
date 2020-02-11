@@ -2,25 +2,33 @@
     {
         "model": "hrapp.training_program_employee",
         "pk": 1,
-        "employee_id": 1,
+        "fields": {
+            "employee_id": 1,
         "training_program_id": 1
+          }
     },
     {
         "model": "hrapp.training_program_employee",
         "pk": 2,
-        "employee_id": 2,
+        "fields": {
+            "employee_id": 2,
         "training_program_id": 1
+          }
     },
     {
         "model": "hrapp.training_program_employee",
         "pk": 3,
-        "employee_id": 3,
+        "fields": {
+            "employee_id": 3,
         "training_program_id": 2
+          }
     },
     {
         "model": "hrapp.training_program_employee",
         "pk": 4,
-        "employee_id": 4,
+        "fields": {
+            "employee_id": 4,
         "training_program_id": 2
+          }
     }
 ]
