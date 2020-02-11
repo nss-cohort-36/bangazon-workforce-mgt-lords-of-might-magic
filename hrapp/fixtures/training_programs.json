@@ -1,0 +1,42 @@
+[
+  {
+    "model": "hrapp.training_programs",
+    "pk": 1,
+    "fields": {
+      "title": "SQL",
+      "start_date": "2020-03-09",
+      "end_date": "2020-03-12",
+      "capacity": 20
+    }
+  },
+  {
+    "model": "hrapp.training_programs",
+    "pk": 2,
+    "fields": {
+      "title": "Emotional Intelligence",
+      "start_date": "2020-04-04",
+      "end_date": "2020-04-06",
+      "capacity": 12
+    }
+  },
+  {
+    "model": "hrapp.training_programs",
+    "pk": 3,
+    "fields": {
+      "title": "I Luv Business",
+      "start_date": "2020-03-28",
+      "end_date": "2020-03-29",
+      "capacity": 12
+    }
+  },
+  {
+    "model": "hrapp.training_programs",
+    "pk": 3,
+    "fields": {
+      "title": "Love",
+      "start_date": "2020-03-28",
+      "end_date": "2020-03-29",
+      "capacity": 12
+    }
+  }
+]
