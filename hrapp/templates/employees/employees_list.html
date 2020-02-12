@@ -7,8 +7,10 @@
 {% for employee in employees %}
     <li>
         <p>{{ employee }}</p>
-        Current computer: {{employee.computer}}
+        <p>Department: {{ employee.department }}</p>
+        {# Current computer: {{employee.computer}} #}
     </li>
 {% endfor %}
 </ol>
+<form action="{% url 'hrapp:employee_form' %}"><button>Add Employee</button></form>
 {% endblock content %}
