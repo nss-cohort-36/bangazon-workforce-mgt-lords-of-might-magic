@@ -2,15 +2,14 @@
 
 {% block content %}
     <section id="computer-delete">
-    <h1>{{ computer.make }}</h1>
-    <h2>Are you sure you wish to delete this computer?</h2>
+    <h2>Are you sure you want to delete this computer?</h2>
 </section>
-    <form action="{% url 'hrapp:computer_details' computer.id %}" method="POST">
+    <form action="{% url 'hrapp:computer_details' computer_id %}" method="POST">
     {% csrf_token %}
       <input type="hidden" name="actual_method" value="DELETE">
       <button>Delete</button>
     </form> 
-    <form action="{% url 'hrapp:computer_details' computer.id %}" method="POST">
+    <form action="{% url 'hrapp:computer_details' computer_id %}" method="GET">
     {% csrf_token %}
       <button>Nevermind</button>
     </form> 

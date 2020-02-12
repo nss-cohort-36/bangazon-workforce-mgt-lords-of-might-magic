@@ -76,7 +76,7 @@ def computer_details(request, computer_id):
                 db_cursor.execute("""
                 DELETE FROM hrapp_computer
                 WHERE id = ?
-                """, (computer_id))
+                """, (str(computer_id)))
 
             return redirect(reverse('hrapp:computers'))
 

@@ -5,8 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def computer_delete(request, computer_id):
-    if request.method == 'POST':
-        print(computer_id)
+    if request.method == 'GET':
         template = 'computers/delete.html'
         context = {
             'computer_id': computer_id
