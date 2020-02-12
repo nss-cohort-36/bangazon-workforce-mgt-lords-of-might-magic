@@ -33,14 +33,16 @@ def computer_list(request):
             dataset = db_cursor.fetchall()
 
             for row in dataset:
-                print(row['unassigned_date'])
                 computer = Computer()
                 computer.id = row['id']
                 computer.make = row['make']
                 computer.purchase_date = row['purchase_date']
                 computer.decommission_date = row['decommission_date']
-                if row['unassigned_date'] != 'None':
-                    computer.current_user = f"{row['first_name']} {row['last_name']}"
+                if row['unassigned_date'] is None:
+                    if row["first_name"] is not None:
+                        computer.current_user = f"{row['first_name']} {row['last_name']}"
+                    else:
+                        computer.current_user = "Unassigned"
                 else:
                     computer.current_user = "Unassigned"
                 all_computers.append(computer)

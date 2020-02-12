@@ -1,7 +1,7 @@
-from django.urls import path
+from django.urls import path, reverse
 from django.conf.urls import include
 from hrapp import views
-from views import *
+from .views import *
 
 app_name = 'hrapp'
 urlpatterns = [
