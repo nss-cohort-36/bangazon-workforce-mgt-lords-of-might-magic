@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HR App</title>
+  </head>
+  <body>
+    <h1>Training Programs</h1>
+
+    <ol>
+    {% for program in all_programs %}
+        <li>
+            {{ program.title }}
+        </li>
+    {% endfor %}
+    </ol>
+  </body>
+</html>
