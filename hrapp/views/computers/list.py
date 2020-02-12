@@ -15,18 +15,8 @@ def computer_list(request):
             db_cursor.execute("""
             SELECT 
                 c.id, 
-                c.make, 
-                c.purchase_date, 
-                c.decommission_date, 
-                e.id, 
-                ec.unassigned_date,
-                e.first_name, 
-                e.last_name
+                c.make
 	        from hrapp_computer c
-	        left join hrapp_employeecomputer ec
-	        on c.id = ec.computer_id
-	        left JOIN hrapp_employee e
-	        ON ec.employee_id = e.id
             """)
 
             all_computers = []
@@ -36,15 +26,15 @@ def computer_list(request):
                 computer = Computer()
                 computer.id = row['id']
                 computer.make = row['make']
-                computer.purchase_date = row['purchase_date']
-                computer.decommission_date = row['decommission_date']
-                if row['unassigned_date'] is None:
-                    if row["first_name"] is not None:
-                        computer.current_user = f"{row['first_name']} {row['last_name']}"
-                    else:
-                        computer.current_user = "Unassigned"
-                else:
-                    computer.current_user = "Unassigned"
+                # computer.purchase_date = row['purchase_date']
+                # computer.decommission_date = row['decommission_date']
+                # if row['unassigned_date'] is None:
+                #     if row["first_name"] is not None:
+                #         computer.current_user = f"{row['first_name']} {row['last_name']}"
+                #     else:
+                #         computer.current_user = "Unassigned"
+                # else:
+                #     computer.current_user = "Unassigned"
                 all_computers.append(computer)
 
         template = 'computers/list.html'

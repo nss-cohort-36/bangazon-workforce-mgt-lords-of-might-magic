@@ -13,7 +13,6 @@ def get_computer(computer_id):
 
         db_cursor.execute("""
         SELECT
-            SELECT 
             c.id, 
             c.make, 
             c.purchase_date, 
@@ -27,8 +26,9 @@ def get_computer(computer_id):
 	    on c.id = ec.computer_id
 	    left JOIN hrapp_employee e
 	    ON ec.employee_id = e.id
-        WHERE c.id = ?
-        """, (computer_id))
+        WHERE ec.unassigned_date is NULL
+        AND c.id = ?
+        """, (str(computer_id)))
 
         computer_data = db_cursor.fetchone()
 
@@ -37,6 +37,8 @@ def get_computer(computer_id):
         computer.make = computer_data['make']
         computer.purchase_date = computer_data['purchase_date']
         computer.decommission_date = computer_data['decommission_date']
+        if computer_data['decommission_date'] is None:
+            computer.decommission_date = 'Still in Use'
         if computer_data['unassigned_date'] is None:
             if computer_data["first_name"] is not None:
                 computer.current_user = f"{computer_data['first_name']} {computer_data['last_name']}"

@@ -2,10 +2,10 @@
 
 {% block content %}
     <section id="computer-details">
-    <h1>{{ comnputer.make }}</h1>
+    <h1>{{ computer.make }}</h1>
     <h2>Purchase Date: {{ computer.purchase_date }}</h2>
 
-    <div>Published in {{ computer.decommission_date }}</div>
+    <div>Decommissioned: {{ computer.decommission_date }}</div>
     <div>Current User: {{ computer.current_user}} </div>
 </section>
     {% comment %} <form action="{% url 'hrapp:computers' computer.id %}" method="POST">

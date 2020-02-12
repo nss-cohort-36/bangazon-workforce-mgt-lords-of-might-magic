@@ -8,10 +8,12 @@
     
 
     <li>
-        <h3>{{ computer.make }}</h3>
-        <div> Purchase Date: {{computer.purchase_date}}
+        <a href="{% url 'hrapp:computer_details' computer.id %}">
+                {{ computer.make }}
+            </a>
+        {% comment %} <div> Purchase Date: {{computer.purchase_date}}
         Decommission Date: {{computer.decommission_date}} </div>
-        <div> Current User: {{computer.current_user}} </div>
+        <div> Current User: {{computer.current_user}} </div> {% endcomment %}
     </li>
 {% endfor %}
 </ol>
