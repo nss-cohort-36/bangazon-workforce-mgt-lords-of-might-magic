@@ -1,40 +1,46 @@
 import sqlite3
 from django.shortcuts import render, redirect
 from hrapp.models import Employee
+from django.shortcuts import render
+from hrapp.models import Employee, Department
 from ..connection import Connection
 from django.urls import reverse
 
+def create_employee(cursor, row):
+    _row = sqlite3.Row(cursor, row)
+
+    e = Employee()
+    e.id = _row["id"]
+    e.first_name = _row["first_name"]
+    e.last_name = _row["last_name"]
+    
+    d = Department()
+    d.name = _row["department"]
+
+    e.department = d
+
+    return e
 
 def employee_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
-            conn.row_factory = sqlite3.Row
+            conn.row_factory = create_employee
             db_cursor = conn.cursor()
 
-            # TODO: Add to query: e.department,
             db_cursor.execute("""
-            select
+            SELECT
                 e.id,
                 e.first_name,
                 e.last_name,
+                e.department_id,
                 e.start_date,
-                e.is_supervisor
-            from hrapp_employee e
+                e.is_supervisor,
+                d.name department
+            FROM hrapp_employee e
+            JOIN hrapp_department d ON e.department_id = d.id
             """)
 
-            all_employees = []
-            dataset = db_cursor.fetchall()
-
-            for row in dataset:
-                employee = Employee()
-                employee.id = row['id']
-                employee.first_name = row['first_name']
-                employee.last_name = row['last_name']
-                employee.start_date = row['start_date']
-                employee.is_supervisor = row['is_supervisor']
-                # employee.department = row['department']
-
-                all_employees.append(employee)
+            all_employees = db_cursor.fetchall()
 
         template = 'employees/employees_list.html'
         context = {
