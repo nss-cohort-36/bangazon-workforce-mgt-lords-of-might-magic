@@ -1,13 +1,14 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-<h1>Employees</h1>
+<h1>Employee</h1>
 
 <ol>
 {% for employee in employees %}
     <li>
         <p>{{ employee }}</p>
         <p>Department: {{ employee.department }}</p>
+        <p>Current computer: {{employee.computer}}</p>
     </li>
 {% endfor %}
 </ol>
