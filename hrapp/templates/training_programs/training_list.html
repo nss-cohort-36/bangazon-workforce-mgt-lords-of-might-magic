@@ -1,11 +1,6 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>HR App</title>
-  </head>
-  <body>
+{% extends 'shared/base.html' %}
+
+{% block content %}
     <h1>Training Programs</h1>
 
     <ol>
@@ -15,5 +10,5 @@
         </li>
     {% endfor %}
     </ol>
-  </body>
-</html>
+    <form action="{% url 'hrapp:training_form' %}"><button>Add Training Program</button></form>
+{% endblock content %}
