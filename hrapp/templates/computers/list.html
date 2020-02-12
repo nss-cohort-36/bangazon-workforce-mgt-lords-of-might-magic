@@ -1,0 +1,16 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+<h1>Computers</h1>
+
+<ol>
+{% for computer in computers %}
+    <li>
+        <h3>{{ computer.make }}</h3>
+        <div> Purchase Date: {{computer.purchase_date}}
+        Decommission Date: {{computer.decommission_date}} </div>
+        <div> Current User: {{computer.current_user}} </div>
+    </li>
+{% endfor %}
+</ol>
+{% endblock content %}
