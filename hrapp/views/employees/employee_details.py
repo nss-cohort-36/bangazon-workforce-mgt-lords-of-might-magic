@@ -1,7 +1,6 @@
 import sqlite3
 from django.shortcuts import render
-# from django.contrib.auth.decorators import login_required
-from hrapp.models import Employee, Department, TrainingProgram
+from hrapp.models import Employee, Department, Computer, TrainingProgram
 from ..connection import Connection
 
 
@@ -27,7 +26,7 @@ def create_employee(cursor, row):
     e.department = d
     e.computer = c
 
-    return (e, )
+    return (e, t,)
 
 
 def get_employee(employee_id):
@@ -43,26 +42,28 @@ def get_employee(employee_id):
             e.start_date,
             e.is_supervisor,
             d.name department,
-            c.make computer
+            c.make computer,
+            t.title
         FROM
             hrapp_employee e
-            JOIN hrapp_department d ON e.department_id = d.id 
+            JOIN hrapp_department d ON e.department_id = d.id
             LEFT JOIN hrapp_employeecomputer ec ON e.id = ec.employee_id
-            LEFT JOIN hrapp_computer c ON c.id = ec.id
+            LEFT JOIN hrapp_computer c ON c.id = ec.computer_id
+            LEFT JOIN hrapp_trainingprogramemployee te ON e.id = te.employee_id
+            LEFT JOIN hrapp_trainingprogram t ON t.id = te.training_program_id
         WHERE e.id = ?
         """, (employee_id,))
 
         return db_cursor.fetchone()
 
 
-# @login_required
-def library_details(request, library_id):
+def employee_details(request, employee_id):
     if request.method == 'GET':
-        library = get_library(library_id)
+        employee = get_employee(employee_id)
 
-        template = 'libraries/detail.html'
+        template = 'employees/detail.html'
         context = {
-            'library': library
+            'employee': employee
         }
 
         return render(request, template, context)
