@@ -20,9 +20,9 @@ def create_department(cursor, row):
     employee.last_name = _row['last_name']
     employee.department_id = _row['department_id']
 
-    department.employee = employee
+    department.employee = []
 
-    return department
+    return (department, employee,)
 
 
 def get_department(department_id):
@@ -40,11 +40,20 @@ def get_department(department_id):
             e.last_name,
             e.department_id
         FROM hrapp_department d
-        JOIN hrapp_employee e ON d.id = e.department_id
+        LEFT JOIN hrapp_employee e ON d.id = e.department_id
         where d.id = ?
         """, (department_id,))
 
         return db_cursor.fetchone()
+
+        department_employee = {}
+
+        for(department, employee) in departments:
+            if department.id not in department_employee:
+                department_employee[department.id] = department
+                department_employee[department.id].employees.append(employee)
+            else:
+                department_employee[department.id].employees.append(employee)
 
 @login_required
 def department_details(request, department_id):

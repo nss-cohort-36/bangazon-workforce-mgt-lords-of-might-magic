@@ -9,6 +9,7 @@
     <h1>{{ department.name }}</h1>
     <h2>Has a budget of: {{ department.budget }}</h2>
     <div>Employees in the department:</div>
+    {% for employees in department.employee %}
     <div>{{ department.employee.first_name }} {{department.employee.last_name}}
   </body>
 </html>
