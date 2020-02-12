@@ -2,9 +2,11 @@
 
 {% block content %}
 <h1>Computers</h1>
-
+<form action="{% url 'hrapp:computer_form' %}"><button>Register New Computer</button></form>
 <ol>
 {% for computer in computers %}
+    
+
     <li>
         <h3>{{ computer.make }}</h3>
         <div> Purchase Date: {{computer.purchase_date}}

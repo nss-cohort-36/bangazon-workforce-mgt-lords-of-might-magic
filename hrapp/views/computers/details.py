@@ -28,7 +28,7 @@ def get_computer(computer_id):
 	    left JOIN hrapp_employee e
 	    ON ec.employee_id = e.id
         WHERE c.id = ?
-        """, (computer_id,))
+        """, (computer_id))
 
         computer_data = db_cursor.fetchone()
 

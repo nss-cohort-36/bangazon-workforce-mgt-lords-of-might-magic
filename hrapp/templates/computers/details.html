@@ -1,0 +1,18 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <section id="computer-details">
+    <h1>{{ comnputer.make }}</h1>
+    <h2>Purchase Date: {{ computer.purchase_date }}</h2>
+
+    <div>Published in {{ computer.decommission_date }}</div>
+    <div>Current User: {{ computer.current_user}} </div>
+</section>
+    {% comment %} <form action="{% url 'hrapp:computers' computer.id %}" method="POST">
+    {% csrf_token %}
+      <input type="hidden" name="actual_method" value="DELETE">
+      <button>Delete</button>
+    </form> {% endcomment %}
+    
+  </body>
+{% endblock %}
