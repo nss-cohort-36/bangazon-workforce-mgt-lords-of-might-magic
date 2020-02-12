@@ -6,7 +6,7 @@
             "employee_id": 1,
             "computer_id": 1,
             "assigned_date": "2012-03-09",
-            "unassigned_date": "2013-03-09"}
+            "unassigned_date": null}
         
     },
     {
@@ -16,7 +16,7 @@
             "employee_id": 2,
             "computer_id": 2,
             "assigned_date": "1987-03-09",
-            "unassigned_date": "1990-04-18"
+            "unassigned_date": null
         }
     },
     {
@@ -26,7 +26,7 @@
             "employee_id": 3,
             "computer_id": 3,
             "assigned_date": "2012-10-20",
-            "unassigned_date": "2014-04-05"}
+            "unassigned_date": null}
         
     },
     {
