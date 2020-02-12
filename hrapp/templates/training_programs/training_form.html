@@ -1,11 +1,6 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Bangazon HR App</title>
-  </head>
-  <body>
+{% extends 'shared/base.html' %}
+
+{% block content %}
     <h1>Training Program Form</h1>
 
 
@@ -29,5 +24,4 @@
       </fieldset>
       <input type="submit" value="Add It" />
     </form>
-  </body>
-</html>
+{% endblock content %}
