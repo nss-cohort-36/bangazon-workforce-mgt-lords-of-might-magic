@@ -1,7 +1,10 @@
 import sqlite3
+from django.shortcuts import render, redirect
+from hrapp.models import Employee
 from django.shortcuts import render
 from hrapp.models import Employee, Department
 from ..connection import Connection
+from django.urls import reverse
 
 def create_employee(cursor, row):
     _row = sqlite3.Row(cursor, row)
@@ -39,9 +42,27 @@ def employee_list(request):
 
             all_employees = db_cursor.fetchall()
 
-    template = 'employees/employees_list.html'
-    context = {
-        'employees': all_employees
-    }
+        template = 'employees/employees_list.html'
+        context = {
+            'employees': all_employees
+        }
 
-    return render(request, template, context)
+        return render(request, template, context)
+
+    elif request.method == 'POST':
+        form_data = request.POST
+
+        with sqlite3.connect(Connection.db_path) as conn:
+            db_cursor = conn.cursor()
+
+            db_cursor.execute("""
+            INSERT into hrapp_employee
+            (
+                first_name, last_name, start_date, is_supervisor, department_id
+            )
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            (form_data['first_name'], form_data['last_name'], form_data['start_date'],
+            form_data['is_supervisor'], form_data['department']))
+
+        return redirect(reverse('hrapp:employee_list'))
