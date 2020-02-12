@@ -1,10 +1,9 @@
 import sqlite3
+from django.urls import reverse
 from django.shortcuts import render, redirect
-from hrapp.models import Employee
-from django.shortcuts import render
 from hrapp.models import Employee, Department
 from ..connection import Connection
-from django.urls import reverse
+
 
 def create_employee(cursor, row):
     _row = sqlite3.Row(cursor, row)
@@ -13,13 +12,14 @@ def create_employee(cursor, row):
     e.id = _row["id"]
     e.first_name = _row["first_name"]
     e.last_name = _row["last_name"]
-    
+
     d = Department()
     d.name = _row["department"]
 
     e.department = d
 
     return e
+
 
 def employee_list(request):
     if request.method == 'GET':
@@ -32,7 +32,6 @@ def employee_list(request):
                 e.id,
                 e.first_name,
                 e.last_name,
-                e.department_id,
                 e.start_date,
                 e.is_supervisor,
                 d.name department
