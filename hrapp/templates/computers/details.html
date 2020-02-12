@@ -8,11 +8,11 @@
     <div>Decommissioned: {{ computer.decommission_date }}</div>
     <div>Current User: {{ computer.current_user}} </div>
 </section>
-    {% comment %} <form action="{% url 'hrapp:computers' computer.id %}" method="POST">
+    <form action="{% url 'hrapp:computer_delete' computer.id %}" method="POST">
     {% csrf_token %}
       <input type="hidden" name="actual_method" value="DELETE">
       <button>Delete</button>
-    </form> {% endcomment %}
+    </form> 
     
   </body>
 {% endblock %}
