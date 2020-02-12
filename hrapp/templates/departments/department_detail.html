@@ -1,0 +1,20 @@
+{% extends 'shared/base.html'%}
+
+{% block content %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Department</title>
+  </head>
+  <body>
+    <h1>{{ department.name }}</h1>
+    <h2>Has a budget of: {{ department.budget }}</h2>
+    <div>Employees in the department:</div>
+    <ul>
+    {% for employee in employees %}
+    <li>{{ employee.first_name }} {{ employee.last_name }}</li>
+    {% endfor %}
+    </ul>
+  </body>
+</html>
+{% endblock %}
