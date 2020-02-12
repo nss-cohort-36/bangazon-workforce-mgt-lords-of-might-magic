@@ -5,3 +5,4 @@ from .auth.logout import logout_user
 from .training_programs.training_list import training_list
 from .training_programs.training_form import training_form
 from .departments.department_list import department_list
+from .departments.department_form import department_form
