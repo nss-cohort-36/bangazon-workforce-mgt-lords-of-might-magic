@@ -26,7 +26,7 @@ def department_list(request):
                 department.id = row['id']
                 department.name = row['name']
                 department.budget = row['budget']
-
+                    
                 all_departments.append(department)
 
         template = 'departments/department_list.html'
