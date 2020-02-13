@@ -8,10 +8,14 @@
     <li>
         
         <a href="{% url 'hrapp:department' department.id %}"> {{ department.name }} </a>
+        <br>
         Budget: {{ department.budget }}
+        <br>
+        Size: {{ department.size }}
 
         {% comment %} <p>{{ department.name }}</p>
         Budget: {{ department.budget }} {% endcomment %}
+
     </li>
 {% endfor %}
 </ol>
