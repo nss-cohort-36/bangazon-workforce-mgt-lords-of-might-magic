@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from hrapp.models import Employee, Department, Computer, TrainingProgram
@@ -45,13 +46,18 @@ def get_employee(employee_id):
             e.first_name,
             e.last_name,
             d.name department,
-            c.make computer
+            c.make computer,
+            ec.assigned_date,
+            ec.unassigned_date
         FROM
             hrapp_employee e
             JOIN hrapp_department d ON e.department_id = d.id
             LEFT JOIN hrapp_employeecomputer ec ON e.id = ec.employee_id
             LEFT JOIN hrapp_computer c ON c.id = ec.computer_id
-        WHERE e.id = ?
+        WHERE
+            e.id = ?
+        AND unassigned_date >= strftime('%Y-%m-%d','now') OR unassigned_date IS NULL
+        AND assigned_date >= strftime('%Y-%m-%d','now')
         """, (employee_id,))
 
         return db_cursor.fetchone()
@@ -80,6 +86,7 @@ def get_employee_training(employee_id):
 def employee_details(request, employee_id):
     if request.method == 'GET':
         employee = get_employee(employee_id)
+        print(employee.computer)
         curr_employee_training = get_employee_training(employee_id)
 
         template = 'employees/employee_detail.html'
@@ -102,14 +109,27 @@ def employee_details(request, employee_id):
 
                 db_cursor.execute("""
                 UPDATE hrapp_employee
-                SET last_name = ?,
-                    department = ?,
-                    computer = ?
-                WHERE id = ?
+                SET
+                    last_name = ?,
+                    department_id = ?
+                WHERE id = ?;
                 """,
                 (
-                    form_data['last_name'], form_data['department'],
-                    form_data['computer'], employee_id,
+                    form_data['last_name'], form_data['department'], employee_id,
                 ))
 
-            return redirect(reverse('hrapp:employees'))
+                # if an employee already has a computer, then they need to be unassigned from it, then assigned the new one.
+                db_cursor.execute("""
+                
+                """)
+                
+                db_cursor.execute("""
+                INSERT INTO hrapp_employeecomputer (assigned_date, computer_id, employee_id)
+                VALUES (?, ?, ?)
+                """,
+                (
+                    datetime.today().strftime('%Y-%m-%d'), form_data['computer'], employee_id,
+                ))
+
+
+            return redirect(reverse('hrapp:employee', kwargs={'employee_id': employee_id}))

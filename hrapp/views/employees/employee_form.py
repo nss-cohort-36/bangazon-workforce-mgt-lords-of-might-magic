@@ -27,9 +27,17 @@ def get_avail_computers():
         db_cursor.execute("""
         SELECT
             c.id,
-            c.make
-        FROM hrapp_computer c
+            c.make,
+            e.first_name
+        FROM
+            hrapp_computer c
+            LEFT JOIN hrapp_employeecomputer ec ON c.id = ec.computer_id
+            LEFT JOIN hrapp_employee e ON e.id = ec.employee_id
+        WHERE
+            c.decommission_date IS NULL;
         """)
+
+        print(db_cursor)
 
         return db_cursor.fetchall()
 
