@@ -65,7 +65,8 @@ def computer_list(request):
         with sqlite3.connect(Connection.db_path) as conn:
             db_cursor = conn.cursor()
             today = datetime.datetime.today()
-            employee_id = form_data['employee_id']
+            print(form_data)
+            employee_id = form_data['employee']
             db_cursor.execute("""
             INSERT INTO hrapp_computer
             (
@@ -78,6 +79,7 @@ def computer_list(request):
             computer_id = str(db_cursor.lastrowid)
             db_cursor.close()
             print(computer_id, employee_id)
-            assign_computer(computer_id, employee_id)
+
+        assign_computer(computer_id, employee_id)
 
         return redirect(reverse('hrapp:computers'))
