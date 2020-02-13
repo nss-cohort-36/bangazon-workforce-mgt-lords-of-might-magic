@@ -41,7 +41,11 @@ def employee_list(request):
 
             all_employees = db_cursor.fetchall()
 
-        template = 'employees/employees_list.html'
+        if request.user.is_authenticated:
+            template = 'employees/employees_list.html'
+        else:
+            template = 'employees/employees_list_read_only.html'
+            
         context = {
             'employees': all_employees
         }
