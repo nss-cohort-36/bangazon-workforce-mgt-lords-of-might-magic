@@ -43,7 +43,7 @@
           <label for="department">Department: </label>
           <select id="department" type="text" name="department">
                 {% for department in all_departments %}
-                    <option value="{{ department.id }}">{{ department.name }}</option>
+                    <option value="{{ department.id }}">{{ department }}</option>
                 {% endfor %}
           </select>
       </fieldset>
@@ -52,7 +52,7 @@
             <label for="computer">Computer: </label>
             <select id="computer" type="text" name="computer">
                   {% for computer in all_computers %}
-                      <option value="{{ computer.id }}">{{ computer.name }}</option>
+                      <option value="{{ computer.id }}">{{ computer }}</option>
                   {% endfor %}
             </select>
         </fieldset>

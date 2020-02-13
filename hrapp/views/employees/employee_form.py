@@ -50,7 +50,7 @@ def employee_edit_form(request, employee_id):
         employee = get_employee(employee_id)
         departments = get_departments()
         computers = get_avail_computers()
-
+        print(computers)
         template = 'employees/employees_form.html'
         context = {
             'employee': employee,
