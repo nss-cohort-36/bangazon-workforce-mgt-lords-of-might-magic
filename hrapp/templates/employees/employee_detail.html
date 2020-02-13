@@ -1,16 +1,18 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-<h1>Employee</h1>
-
-<ol>
-{% for employee in employees %}
-    <li>
-        <p>{{ employee }}</p>
-        <p>Department: {{ employee.department }}</p>
-        <p>Current computer: {{employee.computer}}</p>
-    </li>
-{% endfor %}
-</ol>
-<form action="{% url 'hrapp:employee_form' %}"><button>Add Employee</button></form>
-{% endblock content %}
+    <section id="employee-details">
+        <h1>{{ employee }}</h1>
+        <ul>
+	        <li>Department: {{ employee.department }}</li>
+	        <li>Computer: {{ employee.computer }}</li>
+	        <li>Training Programs:
+	        	<ul>
+	            {% for training_program in training_programs %}
+	                <li>{{ training_program.title }}</li>
+	            {% endfor %}
+	           </ul>
+	        </li>
+      	</ul>
+    </section>
+{% endblock %}
