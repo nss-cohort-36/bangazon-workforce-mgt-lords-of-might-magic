@@ -29,7 +29,11 @@ def department_list(request):
                     
                 all_departments.append(department)
 
-        template = 'departments/department_list.html'
+        if request.user.is_authenticated:
+            template = 'departments/department_list.html'
+        else:
+            template = 'departments/department_list_view_only.html'
+
         context = {
             'departments': all_departments
         }

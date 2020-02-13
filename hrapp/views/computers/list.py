@@ -36,8 +36,12 @@ def computer_list(request):
                 # else:
                 #     computer.current_user = "Unassigned"
                 all_computers.append(computer)
+        if request.user.is_authenticated:
+            template = 'computers/list.html'
+        else:
+            template = 'computers/list_view_only.html'
 
-        template = 'computers/list.html'
+
         context = {
             'computers': all_computers
         }

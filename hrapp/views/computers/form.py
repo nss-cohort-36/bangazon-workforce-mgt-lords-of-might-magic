@@ -6,7 +6,7 @@ from hrapp.models import Computer
 
 
 
-# @login_required
+@login_required
 def computer_form(request):
     if request.method == 'GET':
         template = 'computers/form.html'
