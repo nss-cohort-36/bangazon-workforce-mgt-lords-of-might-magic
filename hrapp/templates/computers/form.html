@@ -12,10 +12,10 @@
       </fieldset>
       <fieldset>
       <label for='employee'>Assign to an Employee</label>
-      <select id="employee" type="text" name="employee" default=0>
+      <select id="employee" type="text" name="id" >
                 <option value='0' > Leave Unassigned</option>
-                {% for employee in employees %}
-                    <option value="{{ employee.id }}">{{ employee.first_name }} {{employee.last_name}}</option>
+                {% for person in employees %}
+                    <option value="{{ person.id }}"> {{ person.first_name }} {{person.last_name}} </option>
                 {% endfor %}
           </select>
       </fieldset>

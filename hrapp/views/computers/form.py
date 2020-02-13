@@ -32,7 +32,7 @@ def get_employees():
         unassigned_employees = []
 
         for employee in employee_data:
-            single_employee = Employee
+            single_employee = Employee()
             single_employee.first_name = employee['first_name']
             single_employee.last_name = employee['last_name']
             single_employee.id = employee['id']

@@ -4,6 +4,17 @@ from django.shortcuts import render, redirect, reverse
 from hrapp.models import Computer
 from ..connection import Connection
 
+def assign_computer(computer_id, employee_id):
+    with sqlite3.connect(Connection.db_path) as conn:
+            db_cursor = conn.cursor()
+
+            today = datetime.datetime.today()
+            db_cursor.execute("""
+            INSERT INTO hrapp_employeecomputer (assigned_date, computer_id, employee_id)
+            values (?, ?, ?);
+            """,
+            (today, computer_id, employee_id))
+
 
 def computer_list(request):
     if request.method == 'GET':
@@ -53,9 +64,8 @@ def computer_list(request):
 
         with sqlite3.connect(Connection.db_path) as conn:
             db_cursor = conn.cursor()
-
             today = datetime.datetime.today()
-
+            employee_id = form_data['employee_id']
             db_cursor.execute("""
             INSERT INTO hrapp_computer
             (
@@ -64,5 +74,10 @@ def computer_list(request):
             VALUES (?, ?)
             """,
             (form_data['make'], today))
+
+            computer_id = str(db_cursor.lastrowid)
+            db_cursor.close()
+            print(computer_id, employee_id)
+            assign_computer(computer_id, employee_id)
 
         return redirect(reverse('hrapp:computers'))
