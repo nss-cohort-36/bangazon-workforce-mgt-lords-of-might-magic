@@ -9,5 +9,13 @@
 	        <li>End Date {{ training.end_date }}</li>
 	        <li>Max Attendance {{ training.capacity }}</li>
       	</ul>
+        <form action="{% url 'hrapp:training' training.id %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="actual_method" value="DELETE">
+    <button>Delete</button>
+</form>
+
     </section>
+
+
 {% endblock %}
