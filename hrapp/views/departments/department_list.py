@@ -50,7 +50,11 @@ def department_list(request):
             for department in all_departments:
                 department.size = department_sizes[department.name]
 
-        template = 'departments/department_list.html'
+        if request.user.is_authenticated:
+            template = 'departments/department_list.html'
+        else:
+            template = 'departments/department_list_view_only.html'
+
         context = {
             'departments': all_departments
         }

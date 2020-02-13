@@ -4,9 +4,9 @@
     <h1>Training Programs</h1>
 
     <ol>
-    {% for program in all_programs %}
+    {% for training in trainings %}
         <li>
-            {{ program.title }}
+            <a href="{% url 'hrapp:training' training.id %}">{{ training.title }}</a>
         </li>
     {% endfor %}
     </ol>
