@@ -1,5 +1,6 @@
 import sqlite3
-from django.shortcuts import render
+from django.urls import reverse
+from django.shortcuts import render, redirect
 from hrapp.models import Employee, Department, Computer, TrainingProgram
 from ..connection import Connection
 
@@ -88,3 +89,27 @@ def employee_details(request, employee_id):
         }
 
         return render(request, template, context)
+
+    elif request.method == 'POST':
+        form_data = request.POST
+
+        if (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "PUT"
+        ):
+            with sqlite3.connect(Connection.db_path) as conn:
+                db_cursor = conn.cursor()
+
+                db_cursor.execute("""
+                UPDATE hrapp_employee
+                SET last_name = ?,
+                    department = ?,
+                    computer = ?
+                WHERE id = ?
+                """,
+                (
+                    form_data['last_name'], form_data['department'],
+                    form_data['computer'], employee_id,
+                ))
+
+            return redirect(reverse('hrapp:employees'))
