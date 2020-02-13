@@ -25,6 +25,7 @@ def training_list(request):
                 training_program = TrainingProgram()
                 training_program.id = row['id']
                 training_program.title = row['title']
+                training_program.description = row['description']
                 training_program.start_date = row['start_date']
                 training_program.end_date = row['end_date']
                 training_program.capacity = row['capacity']
@@ -33,7 +34,7 @@ def training_list(request):
 
         template = 'training_programs/training_list.html'
         context = {
-            'all_programs': all_programs
+            'trainings': all_programs
         }
 
         return render(request, template, context)
@@ -47,10 +48,10 @@ def training_list(request):
             db_cursor.execute("""
             INSERT INTO hrapp_trainingprogram
             (
-            title, start_date, end_date, capacity
+            title, description, start_date, end_date, capacity
             )
-            VALUES (?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?)
             """,
-            (form_data['title'], form_data['start_date'], form_data['end_date'], form_data['capacity']))
+            (form_data['title'], form_data['description'], form_data['start_date'], form_data['end_date'], form_data['capacity']))
 
         return redirect(reverse('hrapp:training_list'))
