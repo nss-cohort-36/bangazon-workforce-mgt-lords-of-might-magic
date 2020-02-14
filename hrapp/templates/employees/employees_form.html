@@ -6,41 +6,67 @@
     <title>Bangazon</title>
   </head>
   <body>
-    <h1>Employee Hiring</h1>
+    {% if employee.id is not None %}
+        <h1>Edit Employee Information</h1>
+    {% else %}
+        <h1>Employee Hiring</h1>
+    {% endif %} 
 
-
-    <form action="{% url 'hrapp:employee_list' %}" method="post">
+    {% if employee.id is not None %}
+        <form action="{% url 'hrapp:employee' employee.id %}" method="post">
+    {% else %}
+        <form action="{% url 'hrapp:employee_list' %}" method="post">
+    {% endif %}
       {% csrf_token %}
       <fieldset>
-          <label for="first_name">First Name: </label>
-          <input id="first_name" type="text" name="first_name">
+          {% if employee.id is not None %}
+                <p>First Name: {{ employee.first_name }}</p>
+              {% else %}
+                <label for="first_name">First Name: </label>
+                <input id="first_name" type="text" name="first_name" value="{{ employee.first_name }}">
+          {% endif %}
       </fieldset>
       <fieldset>
           <label for="last_name">Last Name: </label>
-          <input id="last_name" type="text" name="last_name">
+          <input id="last_name" type="text" name="last_name" value="{{ employee.last_name }}">
       </fieldset>
-      <fieldset>
-          <label for="start_date">Employment Start Date: </label>
-          <input id="start_date" type="date" name="start_date">
-      </fieldset>
-      <fieldset>
-          <label for="is_supervisor">Supervisor: </label>
-          <select id='is_supervisor' name='is_supervisor'>
-          <option value=True >Yes</option>
-          <option value=False >No</option>
-          </select>
-          
-      </fieldset>
+      {% if employee.id is None %}
+        <fieldset>
+            <label for="start_date">Employment Start Date: </label>
+            <input id="start_date" type="date" name="start_date">
+        </fieldset>
+        <fieldset>
+            <label for="is_supervisor">Supervisor: </label>
+            <select id='is_supervisor' name='is_supervisor'>
+            <option value=True >Yes</option>
+            <option value=False >No</option>
+            </select>  
+        </fieldset>
+      {% endif %}
       <fieldset>
           <label for="department">Department: </label>
           <select id="department" type="text" name="department">
                 {% for department in all_departments %}
-                    <option value="{{ department.id }}">{{ department.name }}</option>
+                    <option value="{{ department.id }}">{{ department }}</option>
                 {% endfor %}
           </select>
       </fieldset>
-
-      <input type="submit" value="Submit" />
+      {% if employee.id is not None %}
+        <fieldset>
+            <label for="computer">Computer: </label>
+            <select id="computer" type="text" name="computer">
+                  {% for computer in all_computers %}
+                      <option value="{{ computer.id }}">{{ computer }}</option>
+                  {% endfor %}
+            </select>
+        </fieldset>
+      {% endif %}
+      {% if employee.id is not None %}
+          <input type="hidden" name="actual_method" value="PUT">
+          <input type="submit" value="Update" />
+      {% else %}
+          <input type="submit" value="Create" />
+      {% endif %}
     </form>
   </body>
 </html>

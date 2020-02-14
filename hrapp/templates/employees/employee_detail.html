@@ -16,4 +16,11 @@
       	</ul>
 		  <form action="{% url 'hrapp:employee_assign_training' employee.id %}"><button>Assign Training</button></form>
     </section>
+
+    <section id="employee-actions" style="display:flex;">
+        <form action="{% url 'hrapp:employee_edit_form' employee.id %}" method="GET">
+            {% csrf_token %}
+            <button>Edit</button>
+        </form>
+    </section>
 {% endblock %}

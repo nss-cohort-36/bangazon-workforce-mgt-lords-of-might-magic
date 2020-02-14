@@ -1,5 +1,7 @@
 import sqlite3
-from django.shortcuts import render
+from datetime import datetime
+from django.urls import reverse
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from hrapp.models import Employee, Department, Computer, TrainingProgram
 from ..connection import Connection
@@ -17,6 +19,7 @@ def create_employee(cursor, row):
     d.name = _row["department"]
 
     c = Computer()
+    c.id = _row["computer_id"]
     c.make = _row["computer"]
 
     e.department = d
@@ -45,13 +48,17 @@ def get_employee(employee_id):
             e.first_name,
             e.last_name,
             d.name department,
-            c.make computer
+            c.make computer,
+            c.id computer_id,
+            ec.assigned_date,
+            ec.unassigned_date
         FROM
             hrapp_employee e
             JOIN hrapp_department d ON e.department_id = d.id
             LEFT JOIN hrapp_employeecomputer ec ON e.id = ec.employee_id
             LEFT JOIN hrapp_computer c ON c.id = ec.computer_id
         WHERE e.id = ?
+            AND unassigned_date IS NULL
         """, (employee_id,))
 
         return db_cursor.fetchone()
@@ -89,3 +96,48 @@ def employee_details(request, employee_id):
         }
 
         return render(request, template, context)
+
+    elif request.method == 'POST':
+        employee = get_employee(employee_id)
+        form_data = request.POST
+
+        if (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "PUT"
+        ):
+            with sqlite3.connect(Connection.db_path) as conn:
+                db_cursor = conn.cursor()
+
+                db_cursor.execute("""
+                UPDATE hrapp_employee
+                SET last_name = ?,
+                    department_id = ?
+                WHERE id = ?
+                """,
+                (
+                    form_data['last_name'], form_data['department'], employee_id,
+                ))
+                # if an employee already has a computer, then they need to be unassigned from it, then assigned the new one.
+
+                # check if the employee is assigned to the computer in the form input
+
+                # this only happens if there is a new assignment.
+                if form_data['computer'] != employee.computer.id:
+                    db_cursor.execute("""
+                    UPDATE hrapp_employeecomputer
+                    SET unassigned_date = ?
+                    WHERE employee_id = ?
+                    """,
+                    (
+                        datetime.today().strftime('%Y-%m-%d'), employee_id,
+                    ))
+
+                    db_cursor.execute("""
+                    INSERT INTO hrapp_employeecomputer (assigned_date, computer_id, employee_id)
+                    VALUES (?, ?, ?)
+                    """,
+                    (
+                        datetime.today().strftime('%Y-%m-%d'), form_data['computer'], employee_id,
+                    ))
+
+            return redirect(reverse('hrapp:employee', kwargs={'employee_id': employee_id}))
