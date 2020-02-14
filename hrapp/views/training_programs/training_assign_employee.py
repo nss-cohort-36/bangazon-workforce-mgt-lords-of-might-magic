@@ -6,7 +6,7 @@ from hrapp.models import TrainingProgram
 from ..connection import Connection
 
 
-def training_program_assign_employee(request):
+def training_program_assign_employee(request, employee_id):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
             conn.row_factory = sqlite3.Row
@@ -28,12 +28,15 @@ def training_program_assign_employee(request):
                     training_program = TrainingProgram()
                     training_program.id = row['id']
                     training_program.title = row['title']
+                    training_program.start_date = row['start_date']
+                    training_program.end_date = row['end_date']
                     upcoming_programs.append(training_program)
 
-            template = 'training_programs/training_assign.html'
-        context = {
-            'trainings': upcoming_programs
-        }
+            template = 'employees/employee_assign_training.html'
+            context = {
+                'trainings': upcoming_programs,
+                'employee_id': employee_id
+            }
 
         return render(request, template, context)
 
@@ -46,10 +49,10 @@ def training_program_assign_employee(request):
             db_cursor.execute("""
             INSERT INTO hrapp_trainingprogramemployee
             (
-                make, purchase_date
+                employee_id, training_program_id
             )
             VALUES (?, ?)
             """,
-            (form_data['make'], today))
+            (employee_id, form_data['training']))
 
-        return redirect(reverse('hrapp:computers'))
+        return redirect(reverse('hrapp:employee_list'))
