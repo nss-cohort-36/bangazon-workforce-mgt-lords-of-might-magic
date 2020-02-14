@@ -1,9 +1,10 @@
 import sqlite3
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from hrapp.models import Employee, Department, Computer, model_factory
+from hrapp.models import Department, Computer, model_factory
 from .employee_details import get_employee
 from ..connection import Connection
+
 
 def get_departments():
     with sqlite3.connect(Connection.db_path) as conn:
@@ -18,7 +19,8 @@ def get_departments():
         """)
 
         return db_cursor.fetchall()
-# need to make it only show computers that aren't taken & aren't decomissioned
+
+
 def get_avail_computers():
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = model_factory(Computer)
