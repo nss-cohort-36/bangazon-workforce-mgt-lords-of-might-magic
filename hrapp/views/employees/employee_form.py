@@ -18,7 +18,7 @@ def get_departments():
         """)
 
         return db_cursor.fetchall()
-# need to make it only show computers that aren't taken & aren't decomissioned
+
 def get_avail_computers():
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = model_factory(Computer)
@@ -50,7 +50,7 @@ def employee_edit_form(request, employee_id):
         employee = get_employee(employee_id)
         departments = get_departments()
         computers = get_avail_computers()
-        print(computers)
+
         template = 'employees/employees_form.html'
         context = {
             'employee': employee,
