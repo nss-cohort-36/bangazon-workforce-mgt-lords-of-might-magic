@@ -1,4 +1,5 @@
 import sqlite3
+import datetime
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from hrapp.models import TrainingProgram
@@ -20,13 +21,42 @@ def get_training(training_id):
 
         return db_cursor.fetchone()
 
+def get_training_attendees(training_id):
+    with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        SELECT
+            tpe.id,
+            tpe.employee_id,
+            tpe.training_program_id,
+            e.first_name,
+            e.last_name
+        FROM hrapp_trainingprogramemployee tpe
+        JOIN hrapp_employee e
+        ON tpe.employee_id = e.id
+        WHERE tpe.training_program_id = ?
+        """, (training_id,))
+
+        return db_cursor.fetchall()
+
 
 def training_details(request, training_id):
     if request.method == 'GET':
-        training = get_training(training_id)
+        d = datetime.datetime.today()
+        current_date = str(d).split(' ')[0]
 
-        template = 'training_programs/training_details.html'
+        training = get_training(training_id)
+        attendees = get_training_attendees(training_id)
+
+        if(training['start_date'] < current_date):
+            template = 'training_programs/past_training_details.html'
+        else:
+            template = 'training_programs/training_details.html'
+
         context = {
+            'attendees': attendees,
             'training': training
         }
 

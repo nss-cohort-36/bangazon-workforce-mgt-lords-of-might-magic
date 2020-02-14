@@ -1,0 +1,34 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <section id="training-details">
+        <h1>{{ training.title }}</h1>
+        <ul>
+	        <li>Description: {{ training.description }}</li>
+	        <li>Start Date {{ training.start_date }}</li>
+	        <li>End Date {{ training.end_date }}</li>
+            <li>Max Attendance {{ training.capacity }}</li>
+            <li>
+                <span>Program Attendees</span>
+                <ul>
+                    {% for attendee in attendees %}
+                        <li>{{ attendee.first_name }} {{ attendee.last_name }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+      	</ul>
+    </section>
+    <section id="training-actions" style="display:flex;">
+        <form action="{% url 'hrapp:training' training.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="actual_method" value="DELETE">
+            <button>Delete</button>
+        </form>
+        <form action="{% url 'hrapp:training_edit_form' training.id %}" method="GET">
+            {% csrf_token %}
+            <button>Edit</button>
+        </form>
+    </section>
+
+
+{% endblock %}
