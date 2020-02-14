@@ -7,16 +7,12 @@
   </head>
   <body>
     {% if employee.id is not None %}
-        <h1>Edit Employee Information</h1>
-    {% else %}
-        <h1>Employee Hiring</h1>
+            <h1>Edit Employee Information</h1>
+        {% else %}
+            <h1>Employee Hiring</h1>
     {% endif %} 
 
-    {% if employee.id is not None %}
-        <form action="{% url 'hrapp:employee' employee.id %}" method="post">
-    {% else %}
-        <form action="{% url 'hrapp:employee_list' %}" method="post">
-    {% endif %}
+    <form action="{% url 'hrapp:employee_list' %}" method="post">
       {% csrf_token %}
       <fieldset>
           {% if employee.id is not None %}
