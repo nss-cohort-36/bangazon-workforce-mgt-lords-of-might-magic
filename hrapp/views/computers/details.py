@@ -28,7 +28,7 @@ def get_computer(computer_id):
 	    ON ec.employee_id = e.id
         WHERE ec.unassigned_date is NULL
         AND c.id = ?
-        """, (str(computer_id)))
+        """, (str(computer_id),))
 
         computer_data = db_cursor.fetchone()
 
