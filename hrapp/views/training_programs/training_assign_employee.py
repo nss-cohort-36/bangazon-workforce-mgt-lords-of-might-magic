@@ -16,7 +16,14 @@ def training_program_assign_employee(request, employee_id):
             select
                 *
             from hrapp_trainingprogram ht
-            """)
+            EXCEPT
+            SELECT tr.*
+            FROM hrapp_trainingprogram tr
+            LEFT JOIN hrapp_trainingprogramemployee te
+            ON tr.id = te.training_program_id
+            WHERE te.employee_id = ?
+            """,
+            (str(employee_id),))
 
             upcoming_programs = []
             dataset = db_cursor.fetchall()
