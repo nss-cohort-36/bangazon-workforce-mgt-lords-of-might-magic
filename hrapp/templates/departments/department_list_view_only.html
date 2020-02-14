@@ -8,20 +8,13 @@
 {% for department in departments %}
     <li class="ph3 pv3 bb b--light-silver">
         
-        <a href="{% url 'hrapp:department' department.id %}"> {{ department.name }} </a>
-        <br>
+        <h4> {{ department.name }} </h4>
         Budget: {{ department.budget }}
-        <br>
-        Number of Employees: {{ department.size }}
 
         {% comment %} <p>{{ department.name }}</p>
         Budget: {{ department.budget }} {% endcomment %}
-
     </li>
 {% endfor %}
 </ol>
 </article>
-<div class="flex items-center justify-center">
-<form action="{% url 'hrapp:department_form' %}"><button class="f5 no-underline black bg-animate hover-bg-black hover-white inline-flex items-center pa3 ba border-box mr4">Create Department</button></form>
-</div>
 {% endblock content %}

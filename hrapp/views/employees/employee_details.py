@@ -2,6 +2,7 @@ import sqlite3
 from datetime import datetime
 from django.urls import reverse
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from hrapp.models import Employee, Department, Computer, TrainingProgram
 from ..connection import Connection
 
@@ -82,7 +83,7 @@ def get_employee_training(employee_id):
 
         return db_cursor.fetchall()
 
-
+@login_required
 def employee_details(request, employee_id):
     if request.method == 'GET':
         employee = get_employee(employee_id)

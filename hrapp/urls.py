@@ -16,8 +16,13 @@ urlpatterns = [
     path('employees/<int:employee_id>/', employee_details, name='employee'),
     path('employees/form', employee_form, name='employee_form'),
     path('employees/<int:employee_id>/form/', employee_edit_form, name='employee_edit_form'),
+    path('employees/<int:employee_id>/assigntraining', training_program_assign_employee, name='employee_assign_training'),
+
     path('trainings/', training_list, name='training_list'),
     path('trainings/form', training_form, name='training_form'),
+    path('trainings/past', past_training_list, name='past_training_list'),
+    path('trainings/<int:training_id>', training_details, name='training'),
+    path('trainings/<int:training_id>/form/', training_edit_form, name='training_edit_form'),
     path('departments/', department_list, name='department_list'),
     path('departments/<int:department_id>', department_details, name='department'),
     path('departments/form', department_form, name='department_form'),

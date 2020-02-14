@@ -4,6 +4,7 @@
     "pk": 1,
     "fields": {
       "title": "SQL",
+      "description": "Learn SQL, it's fun",
       "start_date": "2020-03-09",
       "end_date": "2020-03-12",
       "capacity": 14
@@ -14,6 +15,7 @@
     "pk": 2,
     "fields": {
       "title": "Emotional Intelligence",
+      "description": "Get in touch with your soft side",
       "start_date": "2020-04-04",
       "end_date": "2020-04-06",
       "capacity": 12
@@ -24,6 +26,7 @@
     "pk": 3,
     "fields": {
       "title": "I <3 Bizness",
+      "description": "Mo' money, mo' problems",
       "start_date": "2020-03-28",
       "end_date": "2020-03-29",
       "capacity": 10
@@ -34,9 +37,54 @@
     "pk": 4,
     "fields": {
       "title": "The Printer 101",
+      "description": "Have you tried unplugging it and plugging it back in",
       "start_date": "2020-04-15",
       "end_date": "2020-05-01",
       "capacity": 30
+    }
+  },
+  {
+    "model": "hrapp.trainingprogram",
+    "pk": 5,
+    "fields": {
+      "title": "How to roll desks into the hackery",
+      "description": "It's not always a smooth ride",
+      "start_date": "2020-01-05",
+      "end_date": "2020-01-10",
+      "capacity": 15
+    }
+  },
+  {
+    "model": "hrapp.trainingprogram",
+    "pk": 6,
+    "fields": {
+      "title": "The elevator is your friend: a guide to meeting hot women",
+      "description": "Mo' money, mo' problems",
+      "start_date": "2019-12-28",
+      "end_date": "2019-12-21",
+      "capacity": 24
+    }
+  },
+  {
+    "model": "hrapp.trainingprogram",
+    "pk": 7,
+    "fields": {
+      "title": "Fooda: how to avoid food poisoning",
+      "description": "Take the pasta",
+      "start_date": "2019-11-10",
+      "end_date": "2019-11-04",
+      "capacity": 13
+    }
+  },
+  {
+    "model": "hrapp.trainingprogram",
+    "pk": 8,
+    "fields": {
+      "title": "The struggle",
+      "description": "Too much coffee",
+      "start_date": "2019-10-23",
+      "end_date": "2019-10-28",
+      "capacity": 16
     }
   }
 ]

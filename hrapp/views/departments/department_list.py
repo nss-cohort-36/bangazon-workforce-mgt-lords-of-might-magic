@@ -11,25 +11,50 @@ def department_list(request):
             db_cursor = conn.cursor()
 
             db_cursor.execute("""
-            select
+            SELECT
                 d.id,
                 d.name,
-                d.budget
-            from hrapp_department d
+                d.budget,
+                e.id AS 'employee_id'
+            FROM hrapp_department d
+            LEFT JOIN hrapp_employee e
+            ON d.id = e.department_id
             """)
 
             all_departments = []
             dataset = db_cursor.fetchall()
 
+            # creates a list of all unique department objects
             for row in dataset:
                 department = Department()
                 department.id = row['id']
                 department.name = row['name']
                 department.budget = row['budget']
-                    
-                all_departments.append(department)
+                if(department not in all_departments):
+                    all_departments.append(department)
 
-        template = 'departments/department_list.html'
+            # creates a dictionary of all unique department names with values representing employee count
+            department_sizes = dict()
+            for row in dataset:
+                if(row['name'] not in department_sizes):
+                    name = row['name']
+                    department_sizes[name] = 0
+
+            # and here we set the employee count for each department
+            for row in dataset:
+                if(row['employee_id'] is not None):
+                    name = row['name']
+                    department_sizes[name] += 1
+
+            # transfer the department sizes to the department objects in all_departments
+            for department in all_departments:
+                department.size = department_sizes[department.name]
+
+        if request.user.is_authenticated:
+            template = 'departments/department_list.html'
+        else:
+            template = 'departments/department_list_view_only.html'
+
         context = {
             'departments': all_departments
         }
