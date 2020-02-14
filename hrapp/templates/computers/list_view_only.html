@@ -1,12 +1,13 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-<h1>Computers</h1>
-<ol>
+<article class="pa1 pa1-ns">
+<h1 class="f4 bold tc center mw6">Computers</h1>
+<ol class="list pl0 ml0 center mw6 ba b--light-silver br2">
 {% for computer in computers %}
     
 
-    <li>
+    <li class="ph3 pv3 bb b--light-silver">
         <h4>
                 {{ computer.make }}
             </h4>
@@ -16,4 +17,5 @@
     </li>
 {% endfor %}
 </ol>
+</article>
 {% endblock content %}

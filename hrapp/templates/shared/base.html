@@ -5,24 +5,29 @@
     <meta charset="utf-8">
     <title>Bangazon Workforce Management</title>
     <link rel="stylesheet" href="{% static 'styles/base.css' %}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
     {% block css %}
     {% endblock %}
 </head>
 <body>
-    <nav id="site-nav">
-        <ol class="navList">
-            <li class="navList__route"><a href="{% url 'hrapp:home' %}">Home</a></li>
-            <li class="navList__route"><a href="{% url 'hrapp:employee_list' %}">Employees</a></li>
-            <li class="navList__route"><a href="{% url 'hrapp:department_list' %}">Departments</a></li>
-            <li class="navList__route"><a href="{% url 'hrapp:computers' %}">Computers</a></li>
-            <li class="navList__route"><a href="{% url 'hrapp:training_list' %}">Training Programs</a></li>
+<header class="bg-white black-80 tc pv4 avenir">
+  <h1 class="mt2 mb0 baskerville i fw1 f1">Bangazon Workforce Management</h1>
+  <h2 class="mt2 mb0 f6 fw4 ttu tracked">Lords of Might and Magic</h2>
+    <nav id="site-nav" class="bt bb tc mw10 center mt4">
+        {% comment %} <ol class="navList"> {% endcomment %}
+            <a class="navList__route f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" href="{% url 'hrapp:home' %}">Home</a>
+            <a class="navList__route f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" href="{% url 'hrapp:employee_list' %}">Employees</a>
+            <a class="navList__route f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" href="{% url 'hrapp:department_list' %}">Departments</a>
+            <a class="navList__route f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" href="{% url 'hrapp:computers' %}">Computers</a>
+            <a class="navList__route f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" href="{% url 'hrapp:training_list' %}">Training Programs</a>
             {% if request.user.is_authenticated %}
-            <li class="navList__route"><a href="{% url 'hrapp:logout' %}">Logout</a></li>
+            <a class="navList__route f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" href="{% url 'hrapp:logout' %}">Logout</a>
             {% else %}
-            <li class="navList__route"><a href="{% url 'hrapp:login' %}">Login</a></li>
+            <a class="navList__route f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" href="{% url 'hrapp:login' %}">Login</a>
             {% endif %}
-        </ol>
+        {% comment %} </ol> {% endcomment %}
     </nav>
+</header>
     <main class="main-content">
         {% block content %}
         {% endblock %}

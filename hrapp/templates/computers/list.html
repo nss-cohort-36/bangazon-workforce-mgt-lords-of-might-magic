@@ -1,13 +1,13 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-<h1>Computers</h1>
-<form action="{% url 'hrapp:computer_form' %}"><button>Register New Computer</button></form>
-<ol>
+<article class="pa1 pa1-ns">
+<h1 class="f4 bold center mw6">Computers</h1>
+<ol class="list pl0 ml0 center mw6 ba b--light-silver br2">
 {% for computer in computers %}
     
 
-    <li>
+    <li class="ph3 pv3 bb b--light-silver">
         <a href="{% url 'hrapp:computer_details' computer.id %}">
                 {{ computer.make }}
             </a>
@@ -17,4 +17,8 @@
     </li>
 {% endfor %}
 </ol>
+</article>
+<div class="flex items-center justify-center ">
+<form action="{% url 'hrapp:computer_form' %}"><button class="f5 no-underline black bg-animate hover-bg-black hover-white inline-flex items-center pa3 ba border-box mr4">Register New Computer</button></form>
+</div>
 {% endblock content %}

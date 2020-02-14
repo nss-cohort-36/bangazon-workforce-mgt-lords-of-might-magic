@@ -1,11 +1,12 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-<h1>Departments</h1>
+<article class="pa1 pa1-ns">
+<h1 class="f4 bold tc center mw6">Departments</h1>
 
-<ol>
+<ol class="list pl0 ml0 center mw6 ba b--light-silver br2">
 {% for department in departments %}
-    <li>
+    <li class="ph3 pv3 bb b--light-silver">
         
         <a href="{% url 'hrapp:department' department.id %}"> {{ department.name }} </a>
         <br>
@@ -19,5 +20,8 @@
     </li>
 {% endfor %}
 </ol>
-<form action="{% url 'hrapp:department_form' %}"><button>Create Department</button></form>
+</article>
+<div class="flex items-center justify-center">
+<form action="{% url 'hrapp:department_form' %}"><button class="f5 no-underline black bg-animate hover-bg-black hover-white inline-flex items-center pa3 ba border-box mr4">Create Department</button></form>
+</div>
 {% endblock content %}
