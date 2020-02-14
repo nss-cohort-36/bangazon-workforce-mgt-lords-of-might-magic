@@ -35,15 +35,6 @@ def create_training_program(cursor, row):
     return t
 
 
-def create_computer(cursor, row):
-    _row = sqlite3.Row(cursor, row)
-
-    c = Computer()
-    c.make = _row["computer"]
-
-    return c
-
-
 def get_employee(employee_id):
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = create_employee
@@ -92,37 +83,10 @@ def get_employee_training(employee_id):
         return db_cursor.fetchall()
 
 
-def get_employee_computer(employee_id):
-    with sqlite3.connect(Connection.db_path) as conn:
-        conn.row_factory = create_computer
-        db_cursor = conn.cursor()
-
-        db_cursor.execute("""
-        SELECT
-            e.id,
-            e.first_name,
-            e.last_name,
-            d.name department,
-            c.make computer,
-            ec.assigned_date,
-            ec.unassigned_date
-        FROM
-            hrapp_employee e
-            JOIN hrapp_department d ON e.department_id = d.id
-            LEFT JOIN hrapp_employeecomputer ec ON e.id = ec.employee_id
-            LEFT JOIN hrapp_computer c ON c.id = ec.computer_id
-        WHERE
-            e.id = ?
-        AND unassigned_date >= strftime('%Y-%m-%d','now') OR unassigned_date IS NULL
-        AND assigned_date >= strftime('%Y-%m-%d','now')
-        """, (employee_id,))
-
-        return db_cursor.fetchone()
-
-
 def employee_details(request, employee_id):
     if request.method == 'GET':
         employee = get_employee(employee_id)
+        print(employee.computer)
         curr_employee_training = get_employee_training(employee_id)
 
         template = 'employees/employee_detail.html'
@@ -141,7 +105,6 @@ def employee_details(request, employee_id):
             and form_data["actual_method"] == "PUT"
         ):
             with sqlite3.connect(Connection.db_path) as conn:
-                curr_employee_computer = get_employee_computer(employee_id)
                 db_cursor = conn.cursor()
 
                 db_cursor.execute("""
@@ -155,8 +118,11 @@ def employee_details(request, employee_id):
                     form_data['last_name'], form_data['department'], employee_id,
                 ))
 
-                # if an employee already has a computer & is being assigned to a new one, then they need to be unassigned from it, then assigned the new one.
-
+                # if an employee already has a computer, then they need to be unassigned from it, then assigned the new one.
+                db_cursor.execute("""
+                
+                """)
+                
                 db_cursor.execute("""
                 INSERT INTO hrapp_employeecomputer (assigned_date, computer_id, employee_id)
                 VALUES (?, ?, ?)
@@ -164,5 +130,6 @@ def employee_details(request, employee_id):
                 (
                     datetime.today().strftime('%Y-%m-%d'), form_data['computer'], employee_id,
                 ))
+
 
             return redirect(reverse('hrapp:employee', kwargs={'employee_id': employee_id}))
