@@ -14,5 +14,7 @@
 	           </ul>
 	        </li>
       	</ul>
+		  <form action="{% url 'hrapp:employee_assign_training' employee.id %}"><button>Assign Training</button></form>
+{% endblock content %}
     </section>
 {% endblock %}
