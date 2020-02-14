@@ -1,15 +1,20 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-    <h1>Training Programs</h1>
 
-    <ol>
+    <article class="pa1 pa1-ns">
+    <h1 class="f4 bold tc center mw6">Training Programs</h1>
+
+    <ul class="list pl0 ml0 center mw6 ba b--light-silver br2">
     {% for training in trainings %}
-        <li>
+        <li class="ph3 pv3 bb b--light-silver">
             <a href="{% url 'hrapp:training' training.id %}">{{ training.title }}</a>
         </li>
     {% endfor %}
-    </ol>
-    <form action="{% url 'hrapp:training_form' %}"><button>Add Training Program</button></form>
-    <a href="{% url 'hrapp:past_training_list' %}"><button>View Past Training Programs</button></a>
+    </ul>
+    </article>
+    <div class="flex items-center justify-center">
+    <form action="{% url 'hrapp:training_form' %}"><button class="f5 no-underline black bg-animate hover-bg-black hover-white inline-flex items-center pa3 ba border-box mr4">Add Training Program</button></form>
+    <a class="no-underline" href="{% url 'hrapp:past_training_list' %}"><button class="f5 no-underline black bg-animate hover-bg-black hover-white inline-flex items-center pa3 ba border-box">View Past Training Programs</button></a>
+    </div>
 {% endblock content %}

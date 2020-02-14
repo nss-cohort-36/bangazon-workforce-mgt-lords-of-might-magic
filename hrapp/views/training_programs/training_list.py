@@ -34,7 +34,11 @@ def training_list(request):
                 if(row['start_date'] > current_date):
                     all_programs.append(training_program)
 
-        template = 'training_programs/training_list.html'
+        if request.user.is_authenticated:
+            template = 'training_programs/training_list.html'
+        else:
+            template = 'training_programs/training_list_view_only.html'
+
         context = {
             'trainings': all_programs
         }

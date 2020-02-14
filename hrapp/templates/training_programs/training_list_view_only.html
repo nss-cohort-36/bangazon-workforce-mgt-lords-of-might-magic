@@ -1,0 +1,17 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+
+    <article class="pa1 pa1-ns">
+    <h1 class="f4 bold tc center mw6">Training Programs</h1>
+
+    <ul class="list pl0 ml0 center mw6 ba b--light-silver br2">
+    {% for training in trainings %}
+        <li class="ph3 pv3 bb b--light-silver">
+            {{ training.title }}
+        </li>
+    {% endfor %}
+    </ul>
+    </article>
+
+{% endblock content %}

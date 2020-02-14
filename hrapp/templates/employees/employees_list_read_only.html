@@ -1,14 +1,16 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-<h1>Employees</h1>
+<article class="pa1 pa1-ns">
+<h1 class="f4 bold tc center mw6">Employees</h1>
 
-<ol>
+<ol class="list pl0 ml0 center mw6 ba b--light-silver br2">
 {% for employee in employees %}
-    <li>
+    <li class="ph3 pv3 bb b--light-silver">
         <p><h4>{{ employee }}</h4></p>
         <p>Department: {{ employee.department }}</p>
     </li>
 {% endfor %}
 </ol>
+</article>
 {% endblock content %}
