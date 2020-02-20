@@ -1,13 +1,15 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-    <h1>Past Training Programs</h1>
 
-    <ol>
+    <article class="pa1 pa1-ns">
+    <h1 class="f4 bold tc center mw6">Past Training Programs</h1>
+
+    <ul class="list pl0 ml0 center mw6 ba b--light-silver br2">
     {% for training in trainings %}
-        <li>
+        <li class="ph3 pv3 bb b--light-silver">
             <a href="{% url 'hrapp:training' training.id %}">{{ training.title }}</a>
         </li>
     {% endfor %}
-    </ol>
+    </ul>
 {% endblock content %}
